@@ -38,6 +38,19 @@
       srcset=""
     />
     <style>
+      :root {
+        --base: #ffc600;
+        --spacing: 10px;
+        --blur: 10px;
+      }
+      img {
+        padding: var(--spacing);
+        background: var(--base);
+        filter: blur(var(--blur));
+      }
+      .h1 {
+        color: var(--base);
+      }
       body {
         text-align: center;
         background: #193549;
@@ -53,5 +66,18 @@
         width: 100px;
       }
     </style>
+    <script>
+      const allItems = document.querySelectorAll(".controls input");
+      allItems.forEach((item) => item.addEventListener("change", uiUpdate));
+      allItems.forEach((item) => item.addEventListener("mousemove", uiUpdate));
+
+      function uiUpdate() {
+        const px = this.dataset.sizing || "";
+        document.documentElement.style.setProperty(
+          `--${this.name}`,
+          this.value + px
+        );
+      }
+    </script>
   </body>
 </html>
